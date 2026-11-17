@@ -1,93 +1,82 @@
 # Product Requirements — Release 1 MVP
 
-**Document:** PRD-001 | **Version:** 0.2 | **Status:** Draft for review
+**Document:** PRD-001 | **Version:** 0.3 | **Status:** Draft for review
 
 ## 1. Product outcome
 
-A school can maintain a trusted digital student register and use teacher-entered attendance and assessment evidence to produce accurate, useful academic reports.
+A school maintains trusted enrolment, attendance and assessment records and produces accurate reports aligned with its validated curriculum and approved local reporting practice.
 
 ## 2. Personas
 
-- **Head teacher / school administrator:** configures the school, academic periods, users, grades/classes and reporting; oversees records.
-- **Class teacher:** manages assigned class register, attendance and relevant assessment records.
-- **Subject teacher:** records assessments/results for authorised classes and subjects.
-- **Read-only report viewer:** accesses only explicitly authorised reports.
+- Head teacher / school administrator.
+- Class teacher.
+- Subject teacher.
+- Read-only report viewer with explicit permissions.
 
-A user may hold more than one role in a small school. Permissions must be additive only where explicitly assigned and must remain school-scoped.
+A user may hold multiple roles in a small school, but access remains least-privilege and school-scoped. No shared accounts.
 
 ## 3. Functional requirements
 
 ### FR-01 School setup
-Maintain school name, approved school identifier (if available), location, contact details, logo and configuration. Do not invent official identifiers. School settings are isolated from other deployments.
+Maintain school profile, verified identifiers where available, location, contact and configuration. Do not invent official identifiers.
 
-### FR-02 Academic structure
-Configure academic years, terms/periods, grades, classes/streams, subjects and teacher assignments. The initial primary-school target is Grades 3–8, consistent with the Department of Education's published primary structure. Only grades actually offered by a school need to be configured. Elementary Prep–Grade 2 is outside this MVP unless separately approved. Do not assume every school has multiple streams or an identical subject offering.
+### FR-02 Academic structure and mixed-grade classes
+Configure academic years/periods, grade levels, class groups, streams, subjects and teacher assignments. Primary MVP defaults to Grades 3–8. Prep–Grade 2 remains a separate elementary stage and excluded unless scope changes. Support a class group containing learners from more than one grade without collapsing their individual enrolled grade, curriculum grade or assessment standards. Record the class group and grade-specific subject/standard assignment separately. Grade 2→3 is a stage transition, not an ordinary primary promotion.
 
 ### FR-03 Student register and enrolment
-Create, view, search and update student profiles. Proposed fields include school student number, legal/preferred names, date of birth where known, sex where required, guardian/contact details, village/community and enrolment details. Collect only necessary information. Support active, transferred, withdrawn and completed statuses. Preserve history; do not hard-delete enrolled learner records through normal workflows.
+Maintain minimum necessary learner identity and enrolment information. Support active, transferred, withdrawn and completed statuses. Preserve history and avoid hard deletion through normal workflows. Confirm mandatory fields and retention rules before release.
 
 ### FR-04 Class placement and progression
-Record dated placement of a student in a class for an academic period. Support promotion and class changes without overwriting historical class membership. Prevent duplicate active placement conflicts unless an authorised exception is recorded.
+Store dated class placements by academic period, preserving history. Validate duplicate active placements and support authorised exceptions with audit. Handle stage transition and transfer as explicit events.
 
 ### FR-05 Attendance
-Allow authorised teachers to view an assigned class list and record attendance by date and session as configured. Initial statuses to validate against school practice: present, unexplained absence, excused absence and late. Keep the data model configurable if a school policy uses additional distinctions. Prevent duplicate attendance entries for the same student/date/session. Permit corrections only to authorised users, recording who changed what, when and why. Support offline capture only after the sync design is validated.
+Record attendance by configured date/session for assigned learners. Candidate statuses (present, unexplained absence, excused absence, late) remain subject to school/policy validation. Prevent duplicates; corrections require authority, reason and audit. Offline capture is not a release commitment until the offline acceptance gate passes.
 
-### FR-06 Assessment configuration and evidence
-Allow authorised staff to configure assessment activities by subject, class, academic year and reporting period. Support a configurable range of methods (for example observation, work sample, project, presentation, practical task, quiz or written test), criteria/rubrics, curriculum learning outcomes/standards/benchmarks where available, evidence notes or attachments subject to privacy/storage design, date and recording method. Numeric score and maximum score are optional fields, not mandatory for every assessment. Weighting or aggregation must only be enabled where an approved school/program rule requires it.
+### FR-06 Curriculum and assessment configuration
+Support versioned curriculum frameworks and sources; grade/subject-specific content standards, performance standards, benchmarks and assessment tasks; local/school standards clearly distinguished from national standards. Support varied methods such as observation, work sample, project, presentation, practical task, quiz and written test. Capture criteria/rubrics, evidence reference, date and teacher. Numeric score is optional. Curriculum terminology and editions must retain source provenance.
 
-### FR-07 Results and achievement records
-Record learner achievement against an assessment activity, including the applicable criteria/outcome, teacher judgement or descriptor, optional score, feedback and evidence reference. Validate numeric scores against maximum score when scores are used. Validate required student/class/subject/period relationships and duplicates. Preserve change history. Do not impose an unvalidated grading scale, overall score or automatic pass/fail rule.
+### FR-07 Results and achievement
+Record learner achievement against configured standards/criteria, teacher judgement/descriptor, feedback and optional numeric score. Do not hard-code unverified scales, weighting, pass/fail or promotion rules. Distinguish missing evidence from zero. Preserve correction history.
 
 ### FR-08 Report cards
-Generate a student report for a selected student, class, academic year and reporting period. Support configurable report sections for: school and student identity; grade/class and period; learning outcomes achieved since the previous report; outcomes currently being worked towards; subject/learning-area achievement and evidence summaries; attitudes, values and other approved student-specific information; attendance; teacher and head teacher comments; and approved sign-off fields. Clearly distinguish missing information from a zero score. Support preview, print and PDF output. The exact school template and any nationally required student record card must be validated before release.
+Provide configurable report sections. Candidate sections include student/school identity, period, outcomes/standards achieved, standards currently being worked towards, subject achievement/evidence, approved attitudes/values fields, attendance, teacher/head teacher comments and authorised sign-off. Mark each section's evidence class (national instrument, local requirement, optional school configuration, unresolved) in the requirements traceability. Exact template remains subject to current policy and school validation.
 
 ### FR-09 Operational reports
-Provide student register/class list, daily and period attendance summaries, individual attendance history, assessment recording sheets (including configurable SAPS/SASS-style outputs where confirmed by school practice), and class/grade achievement summaries. Reports must show their period, filters and generation date.
+Register/class lists, attendance registers and summaries, individual attendance history, assessment recording sheets and class/grade achievement summaries. SAPS/SASS-style layouts are examples only until current use is confirmed.
 
 ### FR-10 Import/export
-Provide controlled CSV export of school-owned records and documented import templates. Imports must validate rows, report errors and avoid silent duplicates. Bulk imports must be previewable before committing.
+Controlled, previewable import/export with row validation, duplicate detection and no silent overwrite.
 
 ### FR-11 User administration
-Create/disable accounts, assign school-scoped roles and class/subject permissions, and revoke access promptly. No shared teacher accounts.
+Individual accounts, prompt revocation, school-scoped roles and class/subject permissions.
 
-### FR-12 Audit and record history
-Record security-relevant and important academic changes, including actor, timestamp, action and affected record. Audit data must not be editable by ordinary users.
+### FR-12 Audit and history
+Audit important academic, administrative, security, export and report events with actor, timestamp, action, affected record and reason where applicable.
 
 ### FR-13 Offline and synchronisation
-The intended design is to support offline attendance and assessment capture on authorised devices. Before release, specify local storage protection, device/user binding, queued writes, retry/idempotency, conflict detection, sync status and recovery after device loss. Do not claim offline support until end-to-end tests pass.
+Offline attendance/assessment capture is a target only. Specify protected local storage, device/session binding, minimal cache, queued writes, unique operation IDs, idempotency, retries, conflict handling, sync status, logout/cache clearing, lost-device response and recovery. Release acceptance requires end-to-end tests for intermittent connectivity, power/device loss, shared-device handover, concurrent edits, account revocation and no silent data loss. If the gate is not passed, ship online-only and explicitly defer offline.
 
 ## 4. Non-functional requirements
 
-- **Privacy:** collect the minimum necessary learner information; document purpose, access, retention and disclosure.
-- **Security:** secure authentication, least privilege, school isolation, encrypted transport, protected secrets and audit trail.
-- **Reliability:** validated backup and restoration; no silent data loss.
-- **Usability:** mobile-first, low-bandwidth conscious, simple class-register workflow and clear validation messages.
-- **Accessibility:** readable text, adequate contrast, keyboard support and clear labels.
-- **Performance:** define measurable targets in the test plan using realistic school-sized datasets and low-bandwidth conditions.
-- **Maintainability:** modular code, migrations, automated tests and deployment documentation.
-- **Portability:** documented exports and stable identifiers.
-- **Interoperability:** versioned API and mapping layer; no dependency on an unconfirmed national platform.
+Privacy by design; server-side least privilege; school isolation; encrypted transport; audit; low-bandwidth mobile usability; accessible forms; measurable performance targets; tested backup/restore; data portability; maintainable migrations and automated tests. Shared phones, power interruption, low/no connectivity and printing must be considered in field validation.
 
-## 5. MVP boundaries
+## 5. Evidence classification and traceability
 
-Included: school setup, users/roles, academic structure, enrolment, class placement, attendance, standards-based assessment evidence and results, report cards, essential reports, export, audit and operational safeguards.
+Every requirement and report field must be classified as one of:
+- National requirement (current authoritative source confirmed).
+- Official curriculum/policy guidance (source and status recorded).
+- Teacher-guide example.
+- Provincial/district instruction.
+- School-specific practice.
+- Proposed product feature.
+- Unresolved.
 
-Excluded: elementary Prep–Grade 2, staff management, payroll, assets/equipment, fees, parent/student portal, library, transport, advanced analytics and national platform build.
+The evidence register must cite source, issuer, version/date, retrieval date, page/section and confidence. PRD wording must not present an illustrative or local practice as a national mandate.
 
-## 6. Business rules requiring validation
+## 6. MVP boundaries
 
-- Academic calendar and term count.
-- Applicable Grades 3–8, subject names/codes and current curriculum versions.
-- School use of learning outcomes, benchmarks, criteria and assessment evidence.
-- Assessment methods and score/achievement aggregation.
-- Grading bands, descriptors and progression rules.
-- Attendance definitions and reporting denominator.
-- Required report-card fields, national student record card, and sign-off.
-- Student identity and transfer process.
-- Data retention and correction rules.
+Included: school setup, users/roles, academic structure, enrolment, placements, attendance, curriculum-aware assessment/evidence/results, configurable reports, export, audit and operational safeguards. Excluded: elementary module, staff management, payroll, assets, fees, parent/student portal, library, transport, advanced analytics and national platform implementation.
 
-No rule in this list becomes an official PNG requirement until supported by an authoritative source or explicit school policy.
+## 7. Business rules requiring validation
 
-## 7. Traceability
-
-Every requirement must map to one or more GitHub Issues, implementation evidence and acceptance tests. Scope changes require impact assessment and approval.
+Academic calendar; subject/syllabus versions; class group and grade assignment; standards and benchmarks; attendance definitions/calculations; report fields/sign-off; student identifiers/transfers; retention; grading descriptors and progression. No unresolved rule becomes an official PNG requirement by assumption.

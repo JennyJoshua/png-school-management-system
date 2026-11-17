@@ -1,116 +1,88 @@
 # Project Charter — PNG School Management System
 
 **Document:** PC-001  
-**Version:** 0.2 (Draft)  
-**Status:** Proposed baseline — owner approval required  
+**Version:** 0.3 (Draft)  
+**Status:** Proposed baseline — owner and relevant school authority approval required  
 **Product:** PNG School Management System (PNG-SMS)
 
 ## 1. Purpose
 
-Build a reusable school-management product for Papua New Guinea (PNG), beginning with primary schools. Each school should be able to operate its own application and central database independently. The product will be delivered in controlled releases, with a practical MVP before broader administration or national integration is attempted.
+Build a reusable school-management product for Papua New Guinea (PNG), beginning with primary schools. Each school should be able to operate its own application and central database independently. Delivery is phased, beginning with a carefully bounded MVP.
 
 ## 2. Vision
 
-Give PNG primary schools a dependable, accessible way to maintain core student and academic records and produce useful school reports. Establish common data standards and integration interfaces so that participating schools can exchange authorised data with a future national platform if one becomes available and is approved.
+Help PNG primary schools maintain dependable student and academic records and produce useful school reports. Establish adaptable data standards and integration interfaces for possible future authorised exchange with a national platform.
 
 ## 3. Initial users and pilot
 
-- Initial market: PNG primary schools (Grades 3–8 under the Department of Education's published primary education structure).
-- Elementary Prep–Grade 2 is a separate education stage and is outside the initial primary-school MVP unless the owner approves a scope change.
-- Proposed reference/pilot school: Baimuru Primary School, subject to school-owner approval, data permissions and pilot readiness.
-- Primary users: head teacher/school administrator, class teacher and authorised subject teacher.
-- Parents and students do not require accounts in Release 1.
+- Initial market: PNG primary schools, generally Grades 3–8 under the Department of Education's published structure and current primary curriculum resources.
+- Prep–Grade 2 is the elementary stage and is outside the primary MVP. Grade 2 to Grade 3 is an education-stage transition, not an ordinary primary-grade promotion.
+- Mixed-grade classes are supported where a school operates them; class composition must not be confused with the student's enrolled grade or curriculum grade.
+- Baimuru Primary School is a proposed reference school, not yet an authorised live-data pilot.
+- Primary users: head teacher/school administrator, class teacher and authorised subject teacher. Parents and students do not need accounts in Release 1.
 
-Use synthetic or properly de-identified data during development. Real learner data may only be used for a pilot after appropriate school authority, consent/notice, security and operational safeguards are in place.
+Use synthetic or properly de-identified information during discovery and development. Real learner data requires documented approval from the legally/administratively responsible school authority, appropriate notice/consent where required, defined access, security controls and pilot readiness. If the owner is also a school employee, the owner must not be treated as the sole independent school-authority approval where governance rules require another authority. The appropriate school governing authority and relevant district/provincial education authority must be identified and their role documented before a live pilot. Do not assume which body has approval jurisdiction.
 
 ## 4. Release 1 objective
 
-Deliver a usable MVP that supports:
+Deliver a usable MVP for:
 1. School profile and configuration.
-2. User accounts and role-based access.
-3. Grades 3–8 (only grades actually offered by the school), classes/streams and configurable academic year/term setup.
-4. Student enrolment and student register.
-5. Daily attendance, including correction history.
-6. Assessment evidence and student achievement/results.
-7. Individual student report cards.
-8. Essential class and school reports, export and print/PDF.
-9. Auditability, backup and recovery, and a tested deployment process.
+2. Individual user accounts and role-based access.
+3. Configurable academic year/periods, Grades 3–8 as applicable, mixed-grade class groups, streams, subjects and teacher assignments.
+4. Student enrolment/register and dated class placements.
+5. Daily attendance with correction history.
+6. Standards/outcomes-aware assessment activities, criteria, evidence and achievement/results.
+7. Configurable student report cards.
+8. Essential class/school reports, controlled export and print/PDF.
+9. Auditability, backup/recovery and a tested deployment process.
+
+Offline attendance and assessment capture is a **Release 1 target, not a current promise**. It may be included only if local data protection, device/session binding, queued writes, idempotent retries, conflict handling, sync visibility, lost-device response and recovery pass end-to-end acceptance tests on supported devices. If these tests are not completed, Release 1 must explicitly ship online-only and record offline capture as deferred; no marketing or requirements text may describe it as delivered.
 
 ## 5. Explicit exclusions from Release 1
 
-- Elementary Prep–Grade 2.
-- Staff personnel/payroll and staff attendance.
-- Equipment, inventory, asset and maintenance management.
-- Parent/student portals and messaging.
-- Fees, accounting, payments and procurement.
-- Timetable, library and transport modules.
-- National platform implementation or automatic nationwide data sharing.
-- Advanced predictive analytics.
-- Native Android/iOS applications (PWA is the proposed first client).
-
-These may be considered in later releases through separately approved requirements.
+Elementary Prep–Grade 2 as a separate school-stage module; staff personnel/payroll; assets/inventory; parent/student portals; messaging; fees/accounting/payments/procurement; timetable/library/transport; national-platform implementation or automatic nationwide sharing; predictive analytics; native Android/iOS apps.
 
 ## 6. Product and deployment principles
 
-- Reusable application code, independently configured/deployed for each school.
-- Separate school database per deployment as the current preferred model; confirm operational cost, backup and maintenance implications in architecture validation.
+- One reusable codebase; no school-specific code forks.
+- Separate school application deployment and database is the preferred hypothesis, not a locked architecture decision.
+- Compare credible deployment/isolation alternatives and whole-life operating cost at 1, 10 and 50 schools, including application hosting, database, backups, monitoring, maintenance, support, upgrades and recovery.
+- Record a decision threshold before selecting a model: no model passes merely because a free tier exists. It must meet isolation, restore, availability, supportability and portability requirements at each scale. If no affordable model meets them, pause scale-out and revise the operating model; do not weaken security to reduce cost.
 - No cross-school access by ordinary school users.
-- Stable school and student identifiers, common code lists and documented APIs.
-- Configurable grades, classes, subjects, terms, assessment methods and report templates.
-- Assessment records should be capable of representing learning outcomes/standards, criteria, evidence and teacher judgements as well as numeric scores.
-- Mobile-first design and offline-first workflows for attendance and assessment, with explicit sync/conflict handling.
-- Exportable school-owned data and documented recovery procedures.
-- Modular design: later features must not require a rewrite of the MVP core.
+- Stable school/student identifiers, versioned APIs, documented code lists and export/import.
+- Configurable curriculum versions, grade-aware subjects, assessment methods and report templates.
+- Assessment supports content/performance standards, benchmarks, criteria, evidence and teacher judgement, with numeric scores optional.
+- Mobile-first, low-bandwidth-conscious design. Offline functionality is conditional on the tests in §4.
+- Preserve historical enrolments and placements; normal workflows must not hard-delete enrolled learner records.
 
 ## 7. Success measures
 
-Release 1 is successful when a pilot school can independently:
-- Set up its academic year, grades and classes.
-- Enrol and find students, preserving historical records.
-- Record and review daily attendance.
-- Record a range of assessment evidence and enter results/achievement judgements.
-- Generate accurate, printable student report cards and class summaries.
-- Use the supported offline workflows and synchronise without silent data loss.
-- Restore from a tested backup.
-- Demonstrate that users cannot access records outside their authority.
-
-Quantitative performance targets and pilot duration will be set in the approved test plan.
+A pilot school can independently configure its academic structure; enrol and locate students; preserve placement history; record/review attendance; record varied assessment evidence and judgements; generate accurate printable reports; demonstrate role and school isolation; and restore from a tested backup. Offline use is a success measure only if the offline gate is passed and included in the release scope.
 
 ## 8. Constraints and assumptions
 
-- Android phones are a primary access device; desktop/tablet support remains useful.
-- Connectivity may be intermittent or unavailable.
-- Schools may have different class structures, assessment practices and report formats.
-- PNG Department of Education curriculum and assessment material is the starting evidence base. Its current applicability, updates and school-level implementation must be validated; no single grading scale or official form is assumed.
-- Free-tier services may have limits and are not automatically suitable for production. No paid service or upgrade without explicit approval.
-- The national platform and its technical standards are unknown; integration readiness must use adaptable mappings, not speculative hard-coded interfaces.
+Connectivity and power may be intermittent. Devices may be shared. Schools may rely on paper registers and require printing. Mixed-grade classes and local calendar/reporting differences must be supported. Current Department of Education curriculum resources identify SBC; assessment terminology and policy instruments must be checked against current authoritative sources and actual implementation. Free-tier services are not automatically production-suitable. No paid service or upgrade without explicit approval.
 
-## 9. Governance and approval gates
+## 9. Governance and approval
 
-The owner approves the product baseline, material scope changes, main-branch merges where required, production deployment, paid services/upgrades, destructive actions and hosted database migrations. Routine implementation and testing within an approved scope may proceed through the agreed workflow.
+The owner approves product baseline, material scope/architecture changes, main merges where the project gate applies, production deployments, paid services/upgrades, destructive actions and hosted database migrations. Routine work within approved scope may proceed under the AI-ACD workflow.
 
-GitHub Issues is the authoritative implementation backlog and handover register. Decisions and changes must be recorded in repository documentation or linked issues.
+The charter remains Draft until an approval record is committed through a reviewed pull request and explicitly records: approving person/role, authority basis, exact document version and commit, decision date, scope approved, conditions and linked evidence. A GitHub issue checkbox or an undocumented verbal assumption does not change the document's status. The pilot authority and real-data permission are separate approvals from product-owner approval.
+
+GitHub Issues is the authoritative backlog and handover register.
 
 ## 10. Phase 0 exit conditions
 
-Before implementation:
-- Product requirements and MVP boundaries approved.
-- PNG curriculum/reporting assumptions researched and gaps recorded.
-- Data dictionary and database model reviewed.
-- Architecture, school isolation and offline/sync design reviewed.
-- Privacy, security, backup and recovery plan reviewed.
-- MVP acceptance criteria and test strategy approved.
-- Repository backlog prioritised and delivery checks defined.
+Requirements and Release 1 boundaries approved; curriculum and reporting assumptions evidenced with limitations; school workflows validated; data dictionary and database model reviewed; architecture/isolation and offline decision reviewed; privacy/security/threat model reviewed; report catalogue and acceptance/test strategy approved; backup/restore and operational plan tested in a non-production environment; CI and repository controls defined; prioritised implementation backlog approved.
 
 ## 11. Open decisions
 
-1. Confirm school-by-school separate database versus another isolation pattern after cost/operations analysis.
-2. Confirm academic year/term structure and whether schools can configure multiple terms.
-3. Validate grade, subject, assessment and reporting conventions against current applicable PNG requirements and school practice.
-4. Define student identifier policy and transfer/migration process.
-5. Define exact offline scope and conflict-resolution rules.
-6. Confirm hosting region, data residency expectations, backup retention and operating costs.
-7. Confirm pilot authority, data governance and real-data safeguards.
-8. Confirm how standards/outcomes, evidence, rubrics/descriptors and achievement judgements are represented in the MVP.
+1. Responsible school governing authority and relevant district/provincial approval route for pilot and data use.
+2. Deployment/database isolation model after 1/10/50-school cost and operational comparison.
+3. Exact offline scope: release only if all offline acceptance tests pass.
+4. Current curriculum, assessment and reporting instruments, and their applicability to the pilot school.
+5. Academic calendar, student identifier, transfer and record retention rules.
+6. Hosting region, data processing terms, backup retention and operating costs.
+7. Approved report template, attendance calculation and achievement descriptors.
 
-**Approval:** This is a draft charter. It does not authorise production implementation, real learner-data processing or paid infrastructure.
+**Approval:** Draft only. This charter does not authorise production implementation, live learner-data processing, paid infrastructure or production deployment.

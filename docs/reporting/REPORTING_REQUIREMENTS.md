@@ -1,66 +1,60 @@
 # Reporting Requirements — Release 1
 
-**Document:** REP-001 | **Version:** 0.2 | **Status:** Draft; PNG and school policy validation required
+**Document:** REP-001 | **Version:** 0.3 | **Status:** Draft; current PNG and school validation required
 
 ## 1. Purpose
 
-Use trusted enrolment, attendance and assessment records to generate useful teacher and head-teacher reports. Report layouts must be configurable because schools may have different approved formats and communities must be able to understand the reports.
+Generate accurate, understandable reports from validated enrolment, attendance and assessment records. Templates and configurable fields must reflect each school's approved practice without misrepresenting local examples as national rules.
 
-## 2. MVP report catalogue
+## 2. MVP report catalogue (proposed)
 
 1. Student enrolment register.
-2. Class/grade list.
+2. Class/grade list, including mixed-grade class grouping.
 3. Daily attendance register.
-4. Monthly/term attendance summary.
-5. Individual student attendance history.
-6. Assessment recording sheet / class mark sheet.
-7. Individual student report card.
-8. Class/grade achievement summary.
-9. School-level enrolment and attendance summary.
-10. Configurable export or print view of a student assessment profile.
+4. Period attendance summary and individual attendance history.
+5. Assessment recording sheet.
+6. Individual student report card.
+7. Class/grade achievement summary.
+8. School enrolment and attendance summary.
+9. Controlled student assessment profile export.
 
-## 3. Student report card — proposed configurable sections
+## 3. Report-card sections and evidence status
 
-- School name, verified school identifier (if applicable), location and logo.
-- Academic year, reporting period and student identity.
-- Grade/class and class teacher.
-- Learning outcomes achieved since the previous report.
-- Learning outcomes the student is currently working towards.
-- Subject/learning-area achievement, criteria and evidence summary.
-- Marks, maximum marks and configured achievement descriptor where the school's approved scheme uses them.
-- Attitudes, values and other approved student-specific information.
-- Attendance counts with defined categories.
-- Teacher and head teacher comments.
-- Approved student, parent/guardian and teacher sign-off fields where school practice requires them.
-- Date generated and report-template version.
+Candidate sections:
+- School/student identity, academic period, grade and class.
+- Curriculum content/performance standards and benchmarks relevant to the student's grade and subject.
+- Learning outcomes/standards achieved and those currently being worked towards.
+- Subject achievement, criteria and evidence summary.
+- Marks/descriptors only where the approved scheme uses them.
+- Attitudes, values and other student-specific information only where approved and appropriately defined.
+- Attendance with explicit categories and calculation rules.
+- Teacher/head teacher comments and school-approved sign-off fields.
+- Generation date and template version.
 
-These sections reflect the Department of Education's National Assessment and Reporting Policy (2003), section 5.3.1, and the Grade 6 English Teacher Guide (2019), sample report card pages 125–126. They are source-backed examples, not a claim that the sample is the current mandatory form for every primary school. Validate current policy, later circulars and school practice before fixing a production template.
+The 2003 National Assessment and Reporting Policy PDF describes achieved and developing outcomes and student-specific information. The Grade 6 English Teacher Guide (2019) provides a sample layout. Until current policy status and local requirements are confirmed, classify these as **published policy evidence requiring current-status confirmation** and **illustrative guide example**, not as a definitive current mandatory national template.
 
-## 4. Accuracy rules
+## 4. Accuracy and integrity rules
 
-- Missing result is not the same as zero.
-- Every report identifies its period and generation date.
-- Attendance percentages must disclose the denominator and treatment of excused absences.
-- Do not calculate an overall score until aggregation and weighting rules are approved.
-- Support evidence-based achievement reporting; do not reduce all assessment to written tests or numeric marks.
-- Report generation must not modify source academic records.
-- Corrections after a report is generated must be reflected in a newly generated version; preserve an audit trail where reports are formally issued.
-- Show incomplete data clearly rather than silently omitting it.
+- Missing result is not zero.
+- Every report identifies period, filters, generation date and template version.
+- Attendance rates show denominator and treatment of excused absence/late categories.
+- No aggregate score, grade band or pass/fail rule without an approved scheme.
+- Incomplete or unavailable data is shown explicitly.
+- Report generation does not modify source records.
+- Reissued reports preserve prior issue history where formally issued.
+- A mixed-grade class report must use each learner's applicable grade/curriculum, not the class label alone.
 
-## 5. Output and usability
+## 5. Output and field constraints
 
-- Mobile preview.
-- Print-friendly layout.
-- Downloadable PDF.
-- School logo and configurable header/footer.
-- Readable black-and-white printing.
-- Consistent pagination and no clipped learner names or subjects.
-- CSV export for authorised data users, with privacy safeguards.
+Mobile preview; print-friendly black-and-white layout; PDF; authorised CSV export. Validate printing access, paper workflow, power interruptions, shared device use and whether paper registers remain the official record during pilot. Signatures and letterheads must not be captured or published without explicit authority and redaction.
 
-## 6. PNG requirements validation
+## 6. Validation gates
 
-The research register at [PNG Curriculum and Assessment Research](../research/PNG_CURRICULUM_ASSESSMENT_RESEARCH.md) records the source evidence and limitations. Before finalising the report card, validate the current national policy and applicable curriculum documents with the pilot school. Record source title, issuing authority, date/version, relevant page/section and exact requirement. Distinguish national requirements from school-specific practice.
+Before fixing a production report:
+- Confirm current national/provincial instrument, edition and exact required fields with the competent authority.
+- Compare blank/de-identified school templates and actual teacher/head-teacher workflow.
+- Obtain teacher validation and documented approval from the responsible school authority.
+- Where a field is claimed as national/provincial, cross-check with a second school or competent provincial/district office.
+- Record unresolved conflicts; keep the field configurable or omit it from fixed defaults.
 
-## 7. Later reporting
-
-Future releases may add staff returns, asset/inventory reports, advanced performance analysis and national statistical returns. These are not part of the Release 1 acceptance scope.
+Research evidence and limitations are maintained in [RES-001](../research/PNG_CURRICULUM_ASSESSMENT_RESEARCH.md).

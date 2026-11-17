@@ -1,97 +1,93 @@
 # PNG Curriculum, Assessment and Reporting Research Register
 
 **Document:** RES-001  
-**Version:** 0.1  
-**Status:** Initial desk research — requires school-level and current-policy validation  
-**Research date:** 17 November 2026
+**Version:** 0.2  
+**Status:** Desk research update — current-policy and school validation still required  
+**Research cutoff:** 17 November 2026  
+**Research agent:** ChatGPT research assistant (automated desk research; not a Department of Education representative)
 
-## 1. Purpose and limitations
+## 1. Purpose, method and limitations
 
-This register captures the first authoritative-source review for the Release 1 primary-school MVP. It is not legal advice, does not replace current Department of Education circulars or provincial instructions, and does not establish that every sample form or curriculum document is currently mandatory. The 2003 National Assessment and Reporting Policy is an important published policy source, but its current status and any later amendments must be confirmed before implementation.
+This register supports Release 1 requirements. It is not legal advice, does not establish that a sample form is mandatory, and cannot certify that all circulars or provincial instructions have been located.
 
-## 2. Findings supported by sources
+Evidence classes:
+- **A — Current official source:** current Department of Education publication/webpage or official syllabus currently presented by the Department.
+- **B — Published policy/instrument:** an identified policy document whose issuing authority and text are known, but whose current force/amendment status still needs confirmation.
+- **C — Implementation example:** teacher guide, sample form or instructional example; informative but not automatically binding.
+- **D — Local practice evidence:** blank school/provincial form or validated workflow supplied by an authorised source; scope is limited to that authority.
+- **U — Unresolved:** not established by sources currently reviewed.
 
-### 2.1 Primary grade range
+Confidence describes confidence in the narrow finding, not legal force: **High** = explicit and directly stated by a current official source; **Moderate** = clear in a dated published instrument or example but current applicability is uncertain; **Low** = indirect, incomplete or locally unverified.
 
-The Department of Education's current public Primary Education page describes primary education as Grades 3–8, with Lower Primary Grades 3–5 and Upper Primary Grades 6–8. Its separate Elementary page lists Prep, Elementary One (Grade 1) and Elementary Two (Grade 2).
+## 2. Findings and product implications
 
-**Product implication:** Release 1 primary scope should default to Grades 3–8. Elementary Prep–Grade 2 should not be silently included in the primary MVP. The grade list must remain configurable for schools, but configuration must not misrepresent the national education stages.
+### 2.1 Primary grade range and curriculum model
 
-Sources:
-- Department of Education, [Primary Education](https://www.education.gov.pg/primary).
-- Department of Education, [Prep & Elementary Education](https://www.education.gov.pg/elementary).
+**Evidence A / High for what the current public page states:** The Department's Primary Education page describes primary as Grades 3–8, lower primary Grades 3–5 and upper primary Grades 6–8. It explicitly labels the syllabus resources as Standard Based Curriculum (SBC), with separate junior and senior primary subjects and grade resources. The elementary page separately lists Prep, Elementary One/Grade 1 and Elementary Two/Grade 2.
 
-### 2.2 Assessment principles
+The Grade 3–5 English syllabus states that PNG adopted a Standards Based Curriculum and describes national content standards and student performance standards. The current primary page is the stronger current entry point; individual syllabus editions still need grade/subject verification.
 
-The National Assessment and Reporting Policy (2003), particularly sections 1, 4 and 5 (PDF pages 3–8), describes assessment as continuous, based on syllabus learning outcomes, criterion-referenced, fair, valid and reliable. It calls for a range of assessment methods and suitable evidence, including theoretical and practical assessment. It also says reports should be understandable to their communities.
-
-The Grade 6 English Teacher Guide (2019), section "Assessment, Monitoring and Reporting" (printed pages 110 onward), illustrates daily, formative and summative assessment; observation and work samples; and recording methods such as Student Assessment Period Sheets (SAPS) and Student Assessment Summary Sheets (SASS).
-
-**Product implication:** The assessment module must not be limited to numeric test marks. It should support configurable assessment methods, learning outcomes/standards, criteria, evidence references and teacher judgements, with numeric marks optional. SAPS/SASS should be validated against the pilot school's actual use before adopting exact layouts.
-
-Sources:
-- Department of Education, [National Assessment and Reporting Policy (2003)](https://www.educationpng.gov.pg/QL_Policies/policies/png-doe-national-assessment-and-reporting-policy.pdf).
-- Department of Education, [English Teacher Guide — Grade 6 (2019)](https://education.gov.pg/english-grd.6-teachers-guide-senior-primary.pdf).
-
-### 2.3 Formal reporting and report-card fields
-
-The National Assessment and Reporting Policy (2003), section 5.3.1 (PDF page 8), says a formal school report must include:
-- a written record of learning outcomes achieved since the previous report;
-- a written record of learning outcomes the student is now working towards; and
-- information about attitudes, values and other additional information specific to the student.
-
-The policy also says formal reporting varies by schooling level, schools should use formats suited to their communities, and national student record cards must be maintained.
-
-The Grade 6 English Teacher Guide (2019), sample report card (printed pages 125–126), includes school/grade/class/term/year and student identity; achievement ratings and subject marks/percentages/grades/comments; benchmarks; life skills/social-emotional development; attendance categories (unexplained absence, excused absence, late, present); teacher and head-teacher comments; and sign-off fields. This is a useful sample, not proof that this exact template or its grading bands are universally current or compulsory.
-
-**Product implication:** Make report-card sections and achievement schemes configurable. Include achieved and developing outcomes, student-specific attitudes/values where approved, attendance, and comments. Do not hard-code the sample guide's A–E bands or percentages without current validation.
+**Product implication:** Use SBC terminology where describing the current published curriculum. Model curriculum versions, content standards, performance standards, grade benchmarks, subjects and assessment tasks as versioned configurable data. Do not assume all grades share the same subject list. Elementary Prep–Grade 2 remains outside the primary MVP; Grade 2→3 is a stage transition.
 
 Sources:
-- National Assessment and Reporting Policy (2003), sections 5.3–5.3.2.
-- Grade 6 English Teacher Guide (2019), sample report card, printed pages 125–126.
+- Department of Education, [Primary Education and SBC syllabuses](https://www.education.gov.pg/primary) (retrieved 17 Nov 2026).
+- Department of Education, [Prep & Elementary](https://www.education.gov.pg/elementary) (retrieved 17 Nov 2026).
+- Department of Education, [Grade 3–5 English Syllabus](https://www.education.gov.pg/syllabus/primarysyllabus/subjects%26syllabus%28SBC%29/col1juniorprimaryss/jp-english-syllabus.pdf) (retrieved 17 Nov 2026).
 
-### 2.4 Curriculum structure and subject variation
+### 2.2 National benchmarks and standards
 
-The Department of Education's public Primary Education page provides separate junior (Grades 3–5) and senior (Grades 6–8) primary syllabus resources. Subject offerings and learning outcomes vary by grade and curriculum document.
+**Evidence A / High for published syllabus content:** The Department-hosted primary syllabus material describes national benchmarks as reference points for targeted achievement standards and links them to content standards, performance standards and assessment tasks. The cited Physical Education syllabus notes national benchmarking at the end of Elementary 2, Grade 5 and Grade 8 and says schools/clusters/districts/provinces may also set benchmarks.
 
-**Product implication:** Subjects and curriculum outcomes should be grade-aware and configurable, rather than assuming one universal subject list across Grades 3–8.
+**Product implication:** Do not model assessment solely as OBE outcomes or numerical marks. Provide versioned curriculum frameworks and standards/benchmarks with source provenance and effective dates. Allow local benchmarks to be separately identified from national benchmarks. Validate exact subject/grade syllabus editions before loading curriculum data.
 
 Source:
-- Department of Education, [Primary Education](https://www.education.gov.pg/primary).
+- Department of Education-hosted [Primary Physical Education syllabus / National Benchmarks](https://www.education.gov.pg/syllabus/primarysyllabus/subjects%26syllabus%28SBC%29/col1juniorprimaryss/jp-pe-syllabus.pdf) (retrieved 17 Nov 2026).
 
-## 3. Initial product decisions recommended from evidence
+### 2.3 Assessment and reporting policy
 
-1. Set the primary-school MVP default grade range to Grades 3–8; exclude Prep–Grade 2 unless scope is formally changed.
-2. Store assessment evidence and achievement judgements in addition to optional numeric scores.
-3. Represent learning outcomes/standards/benchmarks and criteria as configurable curriculum-linked records.
-4. Support achieved and currently developing outcomes in report cards.
-5. Keep report-card layouts, achievement descriptors and grading scales configurable.
-6. Keep attendance categories configurable; validate the exact school register and report conventions.
-7. Design report generation to support school-community readability and printable output.
+**Evidence B / Moderate:** The National Assessment and Reporting Policy PDF hosted by the Department describes continuous assessment based on learning outcomes, a balanced range of methods and professional judgement. Section 5.3.1 describes reports including outcomes achieved, outcomes currently being worked towards and student-specific attitudes/values/additional information. A Pacific regional policy catalogue lists the policy as issued 8 July 2021 while the dataset metadata identifies the document as modified 2003. This date/edition ambiguity must be resolved with the Department; do not infer that the PDF is a newly revised 2021 policy.
 
-These are proposed product decisions pending owner and pilot-school validation.
+**Product implication:** Support evidence from multiple assessment methods and teacher judgement. Keep report sections configurable. Preserve the source's own terminology and do not silently rewrite historical policy as current SBC policy. Current mandatory reporting requirements remain unresolved pending Department confirmation.
 
-## 4. Open validation questions
+Sources:
+- Department of Education, [National Assessment and Reporting Policy PDF](https://www.educationpng.gov.pg/QL_Policies/policies/png-doe-national-assessment-and-reporting-policy.pdf) (retrieved 17 Nov 2026).
+- Pacific Data Hub, [National Assessment and Reporting Policy metadata](https://pacificdata.org/data/dataset/national-assessment-and-reporting-policy) (retrieved 17 Nov 2026; metadata only, not a substitute for the policy issuer).
 
-- Are there later National Assessment and Reporting Policy amendments, circulars, or replacement instruments?
-- Which current syllabus versions and subject names apply to the pilot school's grades?
-- Which SAPS/SASS formats are currently used and required at the school?
-- What is the school's approved report-card template and reporting calendar?
-- Which achievement descriptors or grading bands are currently authorised for each grade/subject?
-- How are practical, oral, project, observation and written evidence recorded?
-- How are absences, excused absences, lateness and attendance rates calculated?
-- What national student record card format and transfer records must be maintained?
-- Are there provincial or school-level reporting instructions that supplement national policy?
+### 2.4 Teacher guides and sample reporting
 
-## 5. Source register
+**Evidence C / Moderate as examples only:** The Grade 6 English Teacher Guide (2019) illustrates assessment methods, recording sheets and a sample report card. Its example ratings, marks and fields are not evidence of a universally mandatory or currently approved report card.
 
-| Source | Issuer | Version/date | Relevant section |
-|---|---|---|---|
-| Primary Education webpage | PNG Department of Education | Current public page checked 17 Nov 2026 | Grades 3–8; lower/upper primary; syllabus links |
-| Prep & Elementary Education webpage | PNG Department of Education | Current public page checked 17 Nov 2026 | Prep, Grade 1 and Grade 2 |
-| National Assessment and Reporting Policy | PNG Department of Education | 2003 | Sections 1, 4, 5.1–5.3.2 |
-| English Teacher Guide — Grade 6 | PNG Department of Education | 2019, First Edition | Assessment, Monitoring and Reporting; sample report card pp. 125–126 |
+**Product implication:** Treat SAPS/SASS-style outputs and sample report-card layouts as optional configurable examples until school and Department/provincial validation confirms use.
 
-## 6. Next validation step
+Source:
+- Department of Education, [Grade 6 English Teacher Guide (2019)](https://education.gov.pg/english-grd.6-teachers-guide-senior-primary.pdf) (retrieved 17 Nov 2026).
 
-Compare these national-source findings with the pilot school's actual enrolment register, attendance register, assessment recording sheets, report cards and transfer/record-card practices. Use blank or de-identified samples only. Record differences as school-specific configuration or as unresolved policy questions; do not assume that one school's current practice is a national rule.
+## 3. Search log and limits
+
+Searches conducted on 17 Nov 2026:
+- Current Department of Education public primary and elementary pages.
+- Department-hosted Grade 3–5 SBC syllabus and primary benchmark syllabus resources.
+- Department-hosted National Assessment and Reporting Policy PDF.
+- Department publications/policies index.
+- Pacific Data Hub / Education Policy Bank metadata for PNG curriculum-and-assessment policy listings.
+- Targeted web searches for PNG standards-based primary curriculum, assessment policy updates and replacement instruments.
+
+**Search outcome:** The sources located confirm current public SBC curriculum resources. The search did not locate a clearly identified replacement for the National Assessment and Reporting Policy or a verified amendment history. This is not proof that no amendment, circular or provincial instruction exists. A Department policy owner or authorised provincial education office must confirm current instruments and applicability.
+
+## 4. Unresolved validation questions
+
+- Is the Department-hosted National Assessment and Reporting Policy still in force, and has it been amended, supplemented or replaced?
+- What is the authoritative edition/effective date for each Grades 3–8 subject syllabus and performance standard?
+- Which benchmarks and reporting descriptors are required at school, cluster, district and provincial levels?
+- Are SAPS/SASS current required forms, optional teacher tools or superseded formats?
+- What student record-card and transfer documents are currently mandatory?
+- Which report-card fields, attendance categories and calculations are required?
+- Which current provincial instructions apply to Gulf Province and the reference school?
+
+## 5. Source provenance and integrity
+
+For each downloaded source retained for detailed analysis, record retrieval date, canonical URL, publisher, title, edition/date, relevant page/section, file size and SHA-256 hash in a follow-up evidence manifest. Do not invent hashes for files not downloaded and retained. Record broken links and alternate official locations. No personal data, completed learner records or identifiable staff records belong in this register.
+
+## 6. Classification rule
+
+A product requirement may be labelled **national requirement** only when supported by a current authoritative instrument or written confirmation from the competent authority. A teacher-guide example is labelled **illustrative**; one school's workflow is **school practice**; conflicting or unverified evidence remains **unresolved**. Do not convert an example or local practice into a national rule.
