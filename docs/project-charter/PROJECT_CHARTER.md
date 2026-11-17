@@ -1,7 +1,7 @@
 # Project Charter — PNG School Management System
 
 **Document:** PC-001  
-**Version:** 0.1 (Draft)  
+**Version:** 0.2 (Draft)  
 **Status:** Proposed baseline — owner approval required  
 **Product:** PNG School Management System (PNG-SMS)
 
@@ -15,7 +15,8 @@ Give PNG primary schools a dependable, accessible way to maintain core student a
 
 ## 3. Initial users and pilot
 
-- Initial market: PNG primary schools.
+- Initial market: PNG primary schools (Grades 3–8 under the Department of Education's published primary education structure).
+- Elementary Prep–Grade 2 is a separate education stage and is outside the initial primary-school MVP unless the owner approves a scope change.
 - Proposed reference/pilot school: Baimuru Primary School, subject to school-owner approval, data permissions and pilot readiness.
 - Primary users: head teacher/school administrator, class teacher and authorised subject teacher.
 - Parents and students do not require accounts in Release 1.
@@ -27,16 +28,17 @@ Use synthetic or properly de-identified data during development. Real learner da
 Deliver a usable MVP that supports:
 1. School profile and configuration.
 2. User accounts and role-based access.
-3. Grades, classes/streams and academic year/term setup.
+3. Grades 3–8 (only grades actually offered by the school), classes/streams and configurable academic year/term setup.
 4. Student enrolment and student register.
 5. Daily attendance, including correction history.
-6. Assessment setup and student results.
+6. Assessment evidence and student achievement/results.
 7. Individual student report cards.
 8. Essential class and school reports, export and print/PDF.
 9. Auditability, backup and recovery, and a tested deployment process.
 
 ## 5. Explicit exclusions from Release 1
 
+- Elementary Prep–Grade 2.
 - Staff personnel/payroll and staff attendance.
 - Equipment, inventory, asset and maintenance management.
 - Parent/student portals and messaging.
@@ -54,7 +56,8 @@ These may be considered in later releases through separately approved requiremen
 - Separate school database per deployment as the current preferred model; confirm operational cost, backup and maintenance implications in architecture validation.
 - No cross-school access by ordinary school users.
 - Stable school and student identifiers, common code lists and documented APIs.
-- Configurable grades, classes, subjects, terms, assessment types and report templates.
+- Configurable grades, classes, subjects, terms, assessment methods and report templates.
+- Assessment records should be capable of representing learning outcomes/standards, criteria, evidence and teacher judgements as well as numeric scores.
 - Mobile-first design and offline-first workflows for attendance and assessment, with explicit sync/conflict handling.
 - Exportable school-owned data and documented recovery procedures.
 - Modular design: later features must not require a rewrite of the MVP core.
@@ -65,7 +68,7 @@ Release 1 is successful when a pilot school can independently:
 - Set up its academic year, grades and classes.
 - Enrol and find students, preserving historical records.
 - Record and review daily attendance.
-- Configure assessments and enter results.
+- Record a range of assessment evidence and enter results/achievement judgements.
 - Generate accurate, printable student report cards and class summaries.
 - Use the supported offline workflows and synchronise without silent data loss.
 - Restore from a tested backup.
@@ -78,7 +81,7 @@ Quantitative performance targets and pilot duration will be set in the approved 
 - Android phones are a primary access device; desktop/tablet support remains useful.
 - Connectivity may be intermittent or unavailable.
 - Schools may have different class structures, assessment practices and report formats.
-- PNG curriculum, assessment and official reporting requirements must be researched and validated; no grading scale or official form is assumed.
+- PNG Department of Education curriculum and assessment material is the starting evidence base. Its current applicability, updates and school-level implementation must be validated; no single grading scale or official form is assumed.
 - Free-tier services may have limits and are not automatically suitable for production. No paid service or upgrade without explicit approval.
 - The national platform and its technical standards are unknown; integration readiness must use adaptable mappings, not speculative hard-coded interfaces.
 
@@ -103,10 +106,11 @@ Before implementation:
 
 1. Confirm school-by-school separate database versus another isolation pattern after cost/operations analysis.
 2. Confirm academic year/term structure and whether schools can configure multiple terms.
-3. Validate grade, subject, assessment and reporting conventions against applicable PNG requirements.
+3. Validate grade, subject, assessment and reporting conventions against current applicable PNG requirements and school practice.
 4. Define student identifier policy and transfer/migration process.
 5. Define exact offline scope and conflict-resolution rules.
 6. Confirm hosting region, data residency expectations, backup retention and operating costs.
 7. Confirm pilot authority, data governance and real-data safeguards.
+8. Confirm how standards/outcomes, evidence, rubrics/descriptors and achievement judgements are represented in the MVP.
 
 **Approval:** This is a draft charter. It does not authorise production implementation, real learner-data processing or paid infrastructure.
