@@ -1,24 +1,27 @@
 # Release 1 MVP — Acceptance Criteria
 
-**Document:** ACC-001 | **Version:** 0.1 | **Status:** Draft
+**Document:** ACC-001 | **Version:** 0.2 | **Status:** Draft; requirements and field validation pending
 
 A feature is accepted only when its linked GitHub Issue acceptance criteria pass and evidence is recorded.
 
 ## Functional acceptance
 
 - [ ] An authorised administrator can configure the school profile and academic year/periods.
-- [ ] Administrator can configure grades, classes/streams, subjects and teacher assignments.
-- [ ] Authorised user can create, search and update a student record.
+- [ ] Administrator can configure Grades 3–8, class groups/streams, subjects and teacher assignments as validated.
+- [ ] Mixed-grade class groups can contain learners from different grades without losing each learner's grade enrolment.
+- [ ] Applicable curriculum/standards are selected by each learner's grade and subject, not inferred from class label.
+- [ ] Authorised user can create, search and update a student record using approved minimum fields.
 - [ ] Student can be enrolled and placed in a class for a defined academic period.
 - [ ] Transfer/withdrawal preserves historical enrolment and academic records.
 - [ ] Teacher can record attendance for an assigned class/date/session.
 - [ ] Duplicate attendance entries are prevented.
 - [ ] Corrections are permission-controlled and audited.
-- [ ] Authorised teacher can configure an assessment and enter valid student results.
-- [ ] Invalid scores and duplicate results are rejected with clear messages.
-- [ ] Historical results remain associated with their original class, subject and period.
-- [ ] Individual report cards generate for a selected student and reporting period.
-- [ ] Missing results are distinguishable from zero.
+- [ ] Authorised teacher can configure an assessment using a supported method and enter criteria/evidence/judgements.
+- [ ] Numeric marks are optional and only used where an approved scheme defines them.
+- [ ] Missing, pending, not assessed and zero are distinguishable.
+- [ ] Historical results remain associated with their original learner, class, subject, curriculum version and period.
+- [ ] Individual report cards generate for a selected student and reporting period using an approved template version.
+- [ ] Reports show incomplete/unavailable data explicitly.
 - [ ] Attendance summaries use an approved, documented calculation.
 - [ ] Reports preview, print and download as PDF without clipped content.
 - [ ] Class lists, attendance and assessment summaries are available.
