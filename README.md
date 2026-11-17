@@ -4,11 +4,13 @@ A reusable, modular school-management product for Papua New Guinea primary schoo
 
 ## Product direction
 
+- The initial target is PNG primary education (Grades 3–8); elementary Prep–Grade 2 is outside this first primary-school MVP unless separately approved.
 - Each participating school has its own application deployment and logically/operationally isolated central database.
 - A shared, reusable codebase and common data standards keep deployments maintainable.
-- The first target users are PNG primary schools; school configuration must accommodate different sizes and operating practices.
+- The product must accommodate different school sizes and approved operating practices.
 - The data model and APIs must be integration-ready for a future authorised national school-management platform, without depending on that platform for the MVP.
 - Staff, assets, equipment and advanced analytics are later releases, not MVP scope.
+- Assessment must support standards-based evidence and reporting, not only numeric test marks.
 
 ## Proposed technology (not yet locked)
 
@@ -21,7 +23,7 @@ Technology choices remain subject to Phase 0 validation, cost/security review an
 
 ## Release roadmap
 
-1. **Release 1 — MVP:** school setup, users/roles, grades/classes, student enrolment, attendance, assessment and results, report cards, essential reports, exports and tested backup/recovery.
+1. **Release 1 — MVP:** school setup, users/roles, Grades 3–8 configuration, classes, student enrolment, attendance, standards-based assessment records/results, report cards, essential reports, exports and tested backup/recovery.
 2. **Release 2:** staff and staff administration.
 3. **Release 3:** equipment, inventory and assets.
 4. **Release 4:** advanced school reporting and analytics.
@@ -34,6 +36,7 @@ Technology choices remain subject to Phase 0 validation, cost/security review an
 - [System Architecture](docs/architecture/SYSTEM_ARCHITECTURE.md)
 - [Database Design](docs/database/DATABASE_DESIGN.md)
 - [Reporting Requirements](docs/reporting/REPORTING_REQUIREMENTS.md)
+- [PNG Curriculum and Assessment Research](docs/research/PNG_CURRICULUM_ASSESSMENT_RESEARCH.md)
 - [Security Specification](docs/security/SECURITY_SPECIFICATION.md)
 - [MVP Acceptance Criteria](docs/requirements/MVP_ACCEPTANCE_CRITERIA.md)
 - [AI-Assisted Continuous Delivery Workflow](docs/delivery/AI_ACD_WORKFLOW.md)
