@@ -1,85 +1,82 @@
-# Database Design — Initial Logical Model
+# Database Design — Conceptual Model (Draft)
 
-**Document:** DB-001 | **Version:** 0.1 | **Status:** Conceptual draft; migration prohibited until approved
+**Document:** DB-001 | **Version:** 0.2 | **Status:** Conceptual only — no physical schema or migration approved  
+**Companion:** [DD-001 Data Dictionary](DATA_DICTIONARY.md)
 
-## 1. Principles
+## 1. Purpose and principles
 
-- One database per school is the preferred deployment pattern, subject to architecture/cost validation.
-- Use PostgreSQL relational integrity, foreign keys, constraints and transactions.
-- Use stable UUID primary keys; maintain a separate human-readable school student number.
-- Preserve academic history rather than overwriting past class placements or results.
-- Store dates and timestamps consistently; define the school timezone.
-- Use controlled code tables/configuration rather than hardcoding school-specific labels.
-- Record created/updated metadata and audit important changes.
-- Avoid collecting sensitive personal data unless a validated school purpose requires it.
+Define the logical information architecture for the PNG primary-school MVP. This document is not a PostgreSQL schema and does not authorise database provisioning or migrations.
 
-## 2. Proposed logical entities
+- One school boundary per deployment is a candidate, not a final architecture decision.
+- Use immutable internal identifiers; school-local student numbers are business identifiers, not primary keys.
+- Preserve enrolment, grade, placement, attendance and assessment history.
+- Keep grade enrolment separate from class-group membership to support mixed-grade classes.
+- Keep curriculum framework, standards, criteria and judgements versioned and source-backed.
+- Collect minimum necessary personal information.
+- No hard deletion through normal school workflows.
+- Physical schema, database vendor, RLS and migration strategy require separate review.
 
-| Entity | Purpose / key relationships |
-|---|---|
-| school_profile | Name, school identifier if verified, location and configuration |
-| user_profile | Authenticated user mapped to school-specific role/profile |
-| role / permission | Administrator, class teacher, subject teacher, report viewer |
-| academic_year | School academic year |
-| academic_period | Term or reporting period within an academic year |
-| grade | Configurable grade level |
-| class_group | Class/stream within a grade and year |
-| subject | School subject and optional standard code |
-| teacher_assignment | User/teacher assigned to class/subject/period |
-| student | Stable learner identity within this school database |
-| guardian_contact | Necessary parent/guardian contacts, with access restrictions |
-| enrolment | Admission date, status, entry details and exit/transfer details |
-| student_class_placement | Dated student-to-class relationship for each period |
-| attendance_session | Date, class and configured session |
-| attendance_record | Student status for a session; unique constraint prevents duplicates |
-| assessment | Subject/class/period assessment definition and maximum score |
-| student_result | Student score and comments for an assessment |
-| report_template | Versioned school-approved report layout/configuration |
-| audit_event | Actor, action, entity, timestamp and change metadata |
-| sync_operation (if offline) | Idempotent client operation, status and conflict metadata |
+## 2. Logical domains
 
-## 3. Relationship outline
+1. School and access: school, user account, school membership, role assignment, teacher assignment, audit event.
+2. Academic structure: academic year, academic period, grade level, class group, class membership, subject.
+3. Learner administration: student, enrolment, grade enrolment, placement, optional guardian contact.
+4. Curriculum and assessment: curriculum framework, curriculum standard, assessment activity, criterion, evidence reference, achievement judgement, optional numeric score.
+5. Attendance: attendance session and attendance record.
+6. Reporting: report template, report issue, report section/value, export job.
+7. Conditional offline: registered device/session, sync operation, sync conflict.
 
-```text
-academic_year -> academic_period
-grade -> class_group -> student_class_placement -> student
-student -> enrolment
-class_group -> teacher_assignment
-class_group + subject + academic_period -> assessment
-assessment + student -> student_result
-class_group + date/session -> attendance_session
-attendance_session + student -> attendance_record
-student + academic_period -> report card data
-user_profile -> audit_event
-```
+Detailed definitions, logical attributes, sensitivity and unresolved questions are in DD-001.
 
-## 4. Key constraints and rules
+## 3. Core relationships
 
-- Student number is unique within a school deployment; never use a name as a key.
-- Preserve former enrolments and class placements with effective dates/status.
-- A student must not have overlapping active class placements for the same applicable period unless an authorised exception is modelled.
-- Attendance has a unique key for student + session.
-- Result has a unique key for student + assessment.
-- Score must be non-negative and no greater than the assessment maximum unless a formally defined exception exists.
-- Assessment must belong to a valid class, subject and academic period.
-- A report must identify the exact academic period and data snapshot/generation time.
-- Deactivation/transfer must not cascade-delete academic history.
-- Use soft-retirement or status transitions for core records; hard deletion is restricted.
+- One school owns its academic structure, users/memberships, learner records, configuration and reports.
+- Academic year contains periods.
+- Class group is a teaching organisation; learners join through dated membership.
+- A learner's grade is stored separately in a dated grade-enrolment record.
+- Learner placement and class membership preserve effective dates and history.
+- Curriculum standards belong to a named framework/version and grade/subject.
+- Assessment activities reference period, subject, applicable standards and criteria.
+- Evidence and achievement judgements are learner-specific and trace to an activity/criterion.
+- Attendance session belongs to a class group; attendance record links one learner to one session.
+- Report issue references a period and exact template version; it does not mutate source records.
+- All privileged and material changes are auditable.
 
-## 5. Identity and future transfers
+## 4. Candidate integrity rules
 
-Use internal UUIDs as immutable database keys. A student number is school-scoped and may not be globally unique. National student identifiers must remain nullable and must only be added when an authoritative scheme and lawful use are confirmed.
+- Unique school-local student number, subject to validated identifier policy.
+- No duplicate active enrolment for the same school/time period without an authorised exception.
+- No overlapping grade enrolment or class placement unless an explicit, auditable exception is allowed.
+- Unique learner/session attendance record.
+- Assessment and judgement must reference valid school, period, subject, learner and curriculum versions.
+- Scores are optional and constrained only by an approved assessment scheme.
+- Missing, pending, not assessed and zero are distinct states.
+- Transfer/withdrawal does not cascade-delete history.
+- Cross-school references are rejected at service and data boundaries.
 
-Design an export package that includes school identifier, record identifiers, data dictionary/version, academic period and provenance. A transfer must be authorised, previewed and auditable; it must not expose unrelated student records.
+## 5. Mixed-grade handling
 
-## 6. Security
+A single class group may include learners from different grade levels. Model separately:
+- class group and academic year;
+- learner's grade enrolment for the period;
+- dated class membership;
+- subject/teacher assignment;
+- curriculum framework, grade-specific standards and assessment criteria.
 
-Apply least-privilege database roles and row-level security where appropriate. Validate school boundary at API and database layers. Do not rely on hidden UI controls. Never expose service-role secrets to the browser. Audit access and sensitive changes according to the approved privacy plan.
+Reports and assessments must use each learner's applicable grade/standard, not infer it from the class label.
 
-## 7. Offline/sync considerations
+## 6. Security, privacy and audit
 
-If offline writes are supported, each client mutation needs a globally unique operation ID, device/session context, client timestamp and server receipt timestamp. Server validation remains authoritative. Duplicate retries must not create duplicate records. Conflicts must be visible and resolvable; preserve both versions where required for review.
+School isolation must be enforced beyond the UI. Exact database isolation/RLS design depends on the architecture decision. No service-role secret in client code. Audit actor, timestamp, action, affected record and reason where appropriate. Sensitive learner/staff data is not used in public repository examples or CI.
 
-## 8. Not yet specified
+## 7. Offline data model (conditional)
 
-Exact column types, nullability, indexes, enum/code values, retention rules, RLS policies, migration scripts, seed data and backup settings are not final. They require a reviewed data dictionary and approved technical design before migrations are created or applied.
+If offline capture is approved, each mutation needs a unique operation ID, authorised user/device/session context, client and server timestamps, idempotent retry handling and a visible resolution state. Conflicts must not silently overwrite academic data. The offline model is excluded from production until the offline release gate passes.
+
+## 8. Decisions intentionally deferred
+
+Physical table/column names and types; indexes; SQL constraints; RLS; tenant topology; auth provider; retention schedules; exact attendance code list; curriculum import format; evidence file storage; score schema; national identifiers; API and migrations.
+
+## 9. Approval gate
+
+The conceptual model must be reconciled with approved requirements, school workflows, privacy/security threat model and deployment/isolation architecture. Only then may a physical schema proposal be prepared for explicit review. No database migration is authorised by this document.
