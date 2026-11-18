@@ -1,6 +1,6 @@
 # System Architecture — Proposed MVP
 
-**Document:** ARC-001 | **Version:** 0.2 | **Status:** Proposed; not approved
+**Document:** ARC-001 | **Version:** 0.3 | **Status:** Proposed; not approved
 
 ## 1. Design goals
 
@@ -12,16 +12,13 @@ Teacher/admin → mobile-first PWA → authenticated API/domain services → enr
 
 ## 3. School isolation decision
 
-Separate app deployment and database per school is the leading hypothesis, not a decision. Compare at least:
-- Separate deployment + database per school.
-- Shared application with isolated per-school database/schema and enforceable identity boundary.
-- Any other viable model supported by evidence.
+The topology is unresolved. Options analysis is in [ADR-001](DEPLOYMENT_ISOLATION_DECISION.md). Dedicated app/database per school remains a hypothesis, not a decision. The analysis compares dedicated stacks, shared app with separate databases, shared database with tenant isolation, and a hybrid control/data plane.
 
-For each option, estimate full operating cost and operational effort at 1, 10 and 50 schools: hosting, database, backups, monitoring, upgrades, support, incident response, restore and data export. Evaluate isolation strength, failure blast radius, backup granularity, recovery, maintenance burden and portability. Define pass/fail thresholds before selecting. A free tier alone is not a pass. If no model meets security and sustainability thresholds, pause expansion and revisit the business/operating model rather than weaken controls.
+No option may proceed unless it passes cross-school isolation, school-level restore/export, incident containment and whole-life cost/supportability criteria. The 1/10/50-school worksheet is not yet populated with verified provider prices; do not treat a free tier as production suitability. P0-06 remains open.
 
 ## 4. Technology options
 
-PWA, API/backend, PostgreSQL/Auth, hosting and GitHub Actions remain candidates. Validate region, data processing terms, service availability/sleep limits, backup/restore, access control, secrets, support and total cost. No paid upgrade without explicit approval.
+PWA, API/backend, PostgreSQL/Auth, hosting and GitHub Actions remain candidates. Validate region, data processing terms, service availability/sleep limits, backup/restore, access control, secrets, support and total cost. No paid upgrade without explicit approval. No production provisioning is authorised by this proposal.
 
 ## 5. Mixed-grade data model implications
 
@@ -29,7 +26,7 @@ A class group may contain learners enrolled in different grades. Keep class grou
 
 ## 6. Offline architecture and release gate
 
-Offline capture is optional for Release 1 unless end-to-end tests pass. Specify minimum local data, protected storage, device/session binding, operation IDs, idempotent retry, conflict detection/resolution, sync status, cache expiry/clearing, lost-device response, shared-device handover and recovery. No silent last-write-wins for conflicting academic records. If any critical test fails or remains unimplemented, release online-only and defer offline.
+Release 1 default is online-only with a validated paper fallback. Offline attendance/assessment is not approved or implemented. [OFF-001](../offline/OFFLINE_SYNC_SPECIFICATION.md) defines local data minimisation, session/device binding, operation IDs, idempotent retry, version checks, conflict handling, sync states, cache expiry, lost-device limits and 18 critical test scenarios. All critical tests and school approval must pass before offline can be enabled. No silent last-write-wins for academic records.
 
 ## 7. National integration readiness
 
@@ -38,3 +35,7 @@ Stable identifiers, versioned API, provenance, field definitions, code-list mapp
 ## 8. Environments and decisions
 
 Separate development/test and production. No production learner data in development. Record ADRs for isolation, technology, identity/access, offline, reports/PDF, backup/region and integration. Architecture is not implementation-ready until security, cost and operational decisions are reviewed.
+
+## 9. Decision status
+
+This architecture and linked documents are design artefacts only. They do not authorise application code, physical schema, hosted database, migration, paid service or deployment. P0-06 to P0-08 remain open pending verified evidence and approval.
